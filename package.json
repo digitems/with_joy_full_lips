@@ -1,0 +1,62 @@
+{
+  "name": "withjoyfullips",
+  "version": "1.0.0",
+  "description": "With Joyful Lips — A Progressive Web App for hymn music streaming and discovery. Worship, praise, and gospel music for every moment.",
+  "author": "AnointTech",
+  "license": "UNLICENSED",
+  "private": true,
+  "type": "module",
+  "homepage": "https://joyfullips.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/anointtech/withjoyfullips"
+  },
+  "keywords": [
+    "hymns",
+    "worship",
+    "music-streaming",
+    "gospel",
+    "pwa",
+    "react",
+    "typescript"
+  ],
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "eslint .",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
+    "@mui/icons-material": "^7.3.8",
+    "@mui/material": "^7.3.8",
+    "axios": "^1.13.5",
+    "firebase": "^12.9.0",
+    "framer-motion": "^12.34.3",
+    "idb": "^8.0.3",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "react-helmet-async": "^2.0.5",
+    "react-router-dom": "^7.13.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.1",
+    "@types/node": "^24.10.1",
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^5.1.1",
+    "eslint": "^9.39.1",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "eslint-plugin-react-refresh": "^0.4.24",
+    "globals": "^16.5.0",
+    "typescript": "~5.9.3",
+    "typescript-eslint": "^8.48.0",
+    "vite": "^7.3.1",
+    "vite-plugin-compression2": "^2.4.0"
+  }
+}

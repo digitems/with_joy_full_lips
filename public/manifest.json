@@ -1,0 +1,19 @@
+{
+  "name": "With Joyful Lips",
+  "short_name": "Joyful Lips",
+  "description": "Hymns for every moment — stream and enjoy your favorite hymns",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FFF8F0",
+  "theme_color": "#795548",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "/icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["music", "entertainment"]
+}

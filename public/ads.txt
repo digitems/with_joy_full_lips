@@ -1,0 +1,8 @@
+# With Joyful Lips — Authorized Digital Sellers (ads.txt)
+# https://iabtechlab.com/ads-txt/
+#
+# After Google AdSense approval, uncomment the line below and replace
+# pub-XXXXXXXXXXXXXXXX with your actual publisher ID (found in AdSense
+# dashboard under Account → Account information → Publisher ID).
+#
+# google.com, pub-XXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0

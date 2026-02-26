@@ -1,0 +1,20 @@
+# With Joyful Lips — Crawler Directives
+User-agent: *
+Allow: /
+
+# Auth & private routes
+Disallow: /login
+Disallow: /phone-auth
+Disallow: /profile
+Disallow: /favorites
+Disallow: /history
+Disallow: /ratings
+Disallow: /downloads
+Disallow: /playlists
+Disallow: /playlist/
+Disallow: /admin/
+
+# API proxy (should not be indexed)
+Disallow: /api/
+
+Sitemap: https://withjoyfullips.com/sitemap.xml

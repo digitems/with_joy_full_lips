@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="/icons/icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/icons/icon.svg" />
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#795548" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="description" content="With Joyful Lips — Stream and enjoy your favorite hymns. Worship, praise, and gospel music for every moment." />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Open Graph fallbacks (overridden per-page by react-helmet-async) -->
+    <meta property="og:title" content="With Joyful Lips — Hymns for Every Moment" />
+    <meta property="og:description" content="Stream and enjoy your favorite hymns. Worship, praise, and gospel music for every moment." />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="With Joyful Lips" />
+    <meta property="og:image" content="/icons/og-image.png" />
+
+    <!-- Twitter Card fallbacks -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="With Joyful Lips — Hymns for Every Moment" />
+    <meta name="twitter:description" content="Stream and enjoy your favorite hymns. Worship, praise, and gospel music for every moment." />
+    <meta name="twitter:image" content="/icons/og-image.png" />
+
+    <!-- Preconnect to critical origins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="dns-prefetch" href="https://accounts.google.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
+    <title>With Joyful Lips — Hymns for Every Moment</title>
+    <!-- Google Identity Services (for Google Sign-In) -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <!--
+      Google AdSense — The ad script is loaded dynamically by the AdSlot
+      component after user consent. To speed up initial fill, you can
+      optionally add the script tag here once approved:
+      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+    -->
+  </head>
+  <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
