@@ -1,5 +1,5 @@
 import { Box, Typography, List, ListItemButton, ListItemIcon, ListItemText, Switch, Divider, Snackbar, Dialog, DialogTitle, DialogContent, DialogActions, Button } from '@mui/material';
-import { Info, Help, DarkMode, InstallDesktop, QueueMusic, Favorite, History, MusicNote, Campaign } from '@mui/icons-material';
+import { Info, Help, DarkMode, InstallDesktop, QueueMusic, Favorite, History, MusicNote, Campaign, PrivacyTip } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import { useInstallPrompt } from '../hooks/useInstallPrompt';
 import { useAuth } from '../context/AuthContext';
@@ -85,6 +85,11 @@ export default function MorePage({ darkMode, onToggleDarkMode }: MorePageProps) 
         <ListItemButton onClick={() => { window.location.href = 'mailto:anointtech@gmail.com?subject=WithJoyfulLips%20App%20Support'; }}>
           <ListItemIcon><Help /></ListItemIcon>
           <ListItemText primary="Help & Support" secondary="Get help with the app" />
+        </ListItemButton>
+
+        <ListItemButton onClick={() => navigate('/privacy')}>
+          <ListItemIcon><PrivacyTip /></ListItemIcon>
+          <ListItemText primary="Privacy Policy" secondary="How we handle your data" />
         </ListItemButton>
       </List>
 

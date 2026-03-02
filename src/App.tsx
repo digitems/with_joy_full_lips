@@ -27,6 +27,7 @@ const CategoryDetailPage = lazy(() => import('./pages/CategoryDetailPage'));
 const PlaylistPage = lazy(() => import('./pages/PlaylistPage'));
 const PlaylistDetailPage = lazy(() => import('./pages/PlaylistDetailPage'));
 const AdManagerPage = lazy(() => import('./pages/AdManagerPage'));
+const PrivacyPolicyPage = lazy(() => import('./pages/PrivacyPolicyPage'));
 
 const PageLoader = () => (
   <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '60vh' }}>
@@ -85,6 +86,7 @@ function App() {
                 <Routes>
                   <Route path="/login" element={<LoginPage />} />
                   <Route path="/phone-auth" element={<PhoneAuthPage />} />
+                  <Route path="/privacy" element={<PrivacyPolicyPage />} />
                   <Route element={<AppShell />}>
                     <Route path="/" element={<HomePage />} />
                     <Route path="/browse" element={<BrowsePage />} />
