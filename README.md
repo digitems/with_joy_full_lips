@@ -1,73 +1,114 @@
-# React + TypeScript + Vite
+# With Joyful Lips
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A Progressive Web App for hymn music streaming and discovery. Worship, praise, and gospel music for every moment.
 
-Currently, two official plugins are available:
+**Live**: [joyfullips.com](https://joyfullips.com)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Tech Stack
 
-## React Compiler
+- **Framework**: React 19 + TypeScript
+- **Build**: Vite 7
+- **UI**: Material UI 7 + Emotion + Framer Motion
+- **Routing**: React Router DOM v7 (lazy-loaded pages)
+- **Auth**: Email/password, Google Sign-In, Firebase Phone OTP
+- **HTTP**: Axios with JWT interceptor & auto-refresh
+- **Offline**: Service worker + IndexedDB (via `idb`)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Getting Started
 
-## Expanding the ESLint configuration
+### Prerequisites
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- Node.js >= 18
+- npm >= 9
+- Backend server running ([joyfulcore](https://github.com/digitems/joyfulcore))
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### Setup
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+git clone git@github.com:digitems/with_joy_full_lips.git
+cd with_joy_full_lips
+npm install
+cp .env.example .env    # Fill in your API keys
+npm run dev              # http://localhost:5173
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Scripts
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Dev server (port 5173, proxies `/api` to `localhost:3000`) |
+| `npm run build` | Type-check + production build to `dist/` |
+| `npm run preview` | Serve production build locally |
+| `npm run lint` | ESLint (flat config v9) |
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Environment Variables
+
+Copy `.env.example` to `.env` and fill in the values:
+
+| Variable | Purpose |
+|----------|---------|
+| `VITE_API_BASE_URL` | Backend API base URL |
+| `VITE_FIREBASE_API_KEY` | Firebase API key (phone auth) |
+| `VITE_FIREBASE_AUTH_DOMAIN` | Firebase auth domain |
+| `VITE_FIREBASE_PROJECT_ID` | Firebase project ID |
+| `VITE_GOOGLE_CLIENT_ID` | Google Sign-In client ID |
+| `VITE_ADSENSE_CLIENT_ID` | Google AdSense client ID |
+| `VITE_AD_SLOT_*` | AdSense slot IDs (leaderboard, infeed, sidebar, mobile banner) |
+
+## Project Structure
+
 ```
+src/
+├── api/            # Axios client + domain API modules (auth, songs, user, categories, ads)
+├── components/
+│   ├── ads/        # Ad slots, consent banner, self-served ads
+│   ├── common/     # SEOHead, SearchBar, AuthRequiredDialog, RatingDialog
+│   ├── layout/     # AppShell, TopAppBar, SideNav, BottomNav
+│   ├── player/     # FullPlayer, MiniPlayer, PlayerControls, ProgressBar, VinylDisk
+│   ├── playlist/   # Playlist cards, create/select sheets
+│   └── songs/      # SongCard, SongListItem, CategorySection
+├── context/        # AuthContext, AudioPlayerContext, PlaylistContext
+├── hooks/          # useMediaSession, useInstallPrompt, useAdExperiment
+├── pages/          # Route pages (lazy-loaded)
+├── theme/          # MUI theme, color palette, gradients
+├── types/          # TypeScript interfaces (Song, User, Category, API)
+└── utils/          # Storage helpers, IndexedDB wrapper, formatters
+```
+
+## Architecture
+
+### State Management
+
+Three React Contexts — no external state library:
+
+- **AuthContext** — Login, registration, session restoration, guest mode. Listens for forced logout from the API interceptor.
+- **AudioPlayerContext** — Playback, queue, shuffle/repeat. Position tracked via `useSyncExternalStore` + `requestAnimationFrame` (not React state) for smooth updates without re-renders.
+- **PlaylistContext** — Local playlist CRUD persisted in IndexedDB.
+
+### API Layer
+
+`src/api/client.ts` creates an Axios instance with:
+- Auto-attached JWT from localStorage (`wjl_access_token`)
+- 401 response interceptor that refreshes tokens and queues pending requests
+- `auth:logout` event dispatch on refresh failure
+
+Domain modules (`auth`, `songs`, `user`, `categories`, `ads`) provide typed wrappers around the client.
+
+### Authentication
+
+| Method | Flow |
+|--------|------|
+| Email/password | Direct API call to backend |
+| Google Sign-In | GSI SDK (loaded in `index.html`) → ID token sent to backend |
+| Phone OTP | Firebase Auth SDK → Firebase ID token sent to backend |
+| Guest mode | Browse-only, no server auth required |
+
+### PWA
+
+- **Service worker** (`public/sw.js`): Network-first for navigation, stale-while-revalidate for assets, no API caching
+- **Manifest**: Standalone display, "Aged Hymnal" theme colors
+- **Install prompt**: Handled via `useInstallPrompt` hook
+
+## Author
+
+**AnointTech**
